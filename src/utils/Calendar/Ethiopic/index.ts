@@ -1,0 +1,1 @@
+export { EthiopicCalendar } from './EthiopicCalendar';

@@ -9,6 +9,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
 
 type DayProps = {
@@ -16,10 +17,12 @@ type DayProps = {
   next: () => void;
   month: number;
   year: number;
+  locals: LanguageCode;
+  mode: Mode;
 };
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
-  const { prev, next, month, year } = props;
+  const { prev, next, month, year, locals = 'AMH', mode } = props;
   return (
     <Fragment>
       <View style={styles.calendarHeader}>
@@ -33,7 +36,7 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
 
         <View style={styles.monthAndYearTextWrapper}>
           <Text style={styles.monthTextStyle}>
-            {getMonthsName()[month - 1]}
+            {getMonthsName({ locals, mode })[month - 1]}
           </Text>
           <Text style={styles.yearTextStyle}>{year}</Text>
         </View>
@@ -49,7 +52,7 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
 
       {/* LIST OF DAYS OF THE WEEK */}
       <View style={styles.daysOfTheWeekWapper}>
-        {getDaysNameOfTheWeek().map((item, i) => (
+        {getDaysNameOfTheWeek(locals).map((item, i) => (
           <Text style={styles.dayTextStyle} key={i} numberOfLines={1}>
             {item}
           </Text>

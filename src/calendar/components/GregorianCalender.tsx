@@ -1,8 +1,8 @@
 import React, { Fragment, useCallback, useMemo, useState } from 'react';
 import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
-import { iterator } from '../utils/generics/array';
-import { Day } from './components/day';
-import { Header } from './components/header';
+import { iterator } from '../../utils/generics/array';
+import { Day } from './day';
+import { Header } from './header';
 
 type GregorianCalendar = {
   //
@@ -74,7 +74,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         prev={prev}
         month={month}
         year={year}
-        locals="ENG"
+        locals={'ENG'}
         mode="GC"
       />
       <View style={styles.calenderBody}>

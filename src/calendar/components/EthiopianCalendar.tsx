@@ -4,13 +4,15 @@ import {
   ethiopicCalendar,
   toEthiopic,
   toGregorian,
-} from '../utils/Calendar/Convertor';
-import { Header } from './components/header';
-import { Day } from './components/day';
-import { iterator } from '../utils/generics';
+} from '../../utils/Calendar/Convertor';
+import { Header } from './header';
+import { Day } from './day';
+import { iterator } from '../../utils/generics';
+import type { LanguageCode } from '../../utils/locals/types';
 
 type EthiopianCalenderProps = {
   date?: { year: number; month: number; day: number };
+  locale: LanguageCode;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -20,6 +22,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
     },
+    locale,
   } = props;
 
   const [day, _setDay] = useState(
@@ -117,8 +120,8 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         prev={prev}
         month={month}
         year={year}
-        locals="AMH"
-        mode="EC"
+        locals={locale}
+        mode={'EC'}
       />
       <View style={styles.calenderBody}>
         <View style={[styles.daysWrapper]}>

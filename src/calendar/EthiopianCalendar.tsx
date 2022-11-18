@@ -7,6 +7,7 @@ import {
 } from '../utils/Calendar/Convertor';
 import { Header } from './components/header';
 import { Day } from './components/day';
+import { iterator } from '../utils/generics';
 
 type EthiopianCalenderProps = {
   date?: { year: number; month: number; day: number };
@@ -111,14 +112,22 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
 
   return (
     <Fragment>
-      <Header next={next} prev={prev} month={month} year={year} />
+      <Header
+        next={next}
+        prev={prev}
+        month={month}
+        year={year}
+        locals="AMH"
+        mode="EC"
+      />
       <View style={styles.calenderBody}>
         <View style={[styles.daysWrapper]}>
           {/* EXTRA DAYS IN THE CALENDAR */}
-          {[...Array(firstDayOfTheMonthIndex)].map((_item, i) => (
+          {iterator(firstDayOfTheMonthIndex).map((_item, i) => (
             <Day
               key={i}
               dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
+              //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
               isCurrentDay={30 - firstDayOfTheMonthIndex + i + 1 === day}
               isCurrentMonth={month === currentMonthIndex}
               isCurrentYear={year === currentYear}
@@ -127,7 +136,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
           ))}
           {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
           {month !== 13
-            ? [...Array(30)].map((_item, i) => (
+            ? iterator(30).map((_item, i) => (
                 <Day
                   key={i}
                   dayNumber={i + 1}
@@ -139,7 +148,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
               // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
               // ELSE IT WILL HAVE % DAYS
-              [...Array(ethiopicCalendar.isLeap(year) ? 6 : 5)].map(
+              iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map(
                 (_item, i) => (
                   <Day
                     key={i}
@@ -151,10 +160,11 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 )
               )}
           {/* EXTRA DAYS IN THE CALENDAR */}
-          {[...Array(nextDays)].map((_item, i) => (
+          {iterator(nextDays).map((_item, i) => (
             <Day
               key={i}
               dayNumber={i + 1}
+              //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
               isCurrentDay={i + 1 === day}
               isCurrentMonth={month === currentMonthIndex}
               isCurrentYear={year === currentYear}

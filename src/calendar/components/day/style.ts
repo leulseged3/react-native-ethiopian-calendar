@@ -25,5 +25,16 @@ export const makeStyle = (theme: Theme = {}) => {
     today: {
       color: mergedStyles.todayTextColor,
     } as TextStyle,
+    selectedText: {
+      color: mergedStyles.selectedDayTextColor,
+    } as TextStyle,
+    selected: {
+      width: 35,
+      height: 35,
+      borderRadius: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: mergedStyles.todayTextColor,
+    } as ViewStyle,
   });
 };

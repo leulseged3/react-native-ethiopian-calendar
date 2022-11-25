@@ -1,20 +1,24 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
+import type { SelectedDate } from 'src/types';
 import { iterator } from '../../utils/generics/array';
 import { Day } from './day';
 import { Header } from './header';
 import { makeStyle } from './styles';
 
 type GregorianCalendar = {
-  //
+  onDatePress: (date: SelectedDate) => void;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
-  const {} = props;
+  const { onDatePress } = props;
 
   const [date, _setDate] = useState(1);
   const [month, setMonth] = useState(() => new Date().getMonth() + 1);
   const [year, setYear] = useState(() => new Date().getFullYear());
+
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>();
+
   const styles = makeStyle();
 
   const lastDayOfTheCurrentMonth = useMemo(() => {
@@ -77,6 +81,22 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     );
   };
 
+  const selected = (iDate: number) => {
+    if (selectedDate) {
+      return (
+        selectedDate.date === iDate &&
+        selectedDate.month === month &&
+        selectedDate.year === year
+      );
+    }
+    return false;
+  };
+
+  const handleDayPress = (pressedDay: number) => {
+    setSelectedDate({ date: pressedDay, month: month, year: year });
+    onDatePress({ date: pressedDay, month: month, year: year });
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -93,7 +113,6 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
           <Day
             key={i}
             dayNumber={lastDayOfPreviousMonth - firstDayOfTheMonthIndex + i - 1}
-            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
             extraDays
           />
         ))}
@@ -102,18 +121,14 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
           <Day
             key={i}
             dayNumber={i + 1}
-            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
             today={today(i + 1)}
+            selected={selected(i + 1)}
+            onPress={() => handleDayPress(i + 1)}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
-          <Day
-            key={i}
-            dayNumber={i + 1}
-            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            extraDays
-          />
+          <Day key={i} dayNumber={i + 1} extraDays />
         ))}
       </View>
     </View>

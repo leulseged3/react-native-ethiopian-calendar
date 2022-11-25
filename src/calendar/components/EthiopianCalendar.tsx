@@ -10,10 +10,12 @@ import { Day } from './day';
 import { iterator } from '../../utils/generics';
 import type { LanguageCode } from '../../utils/locals/types';
 import { makeStyle } from './styles';
+import type { SelectedDate } from 'src/types';
 
 type EthiopianCalenderProps = {
   date?: { year: number; month: number; day: number };
   locale: LanguageCode;
+  onDatePress: (date: SelectedDate) => void;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -24,7 +26,9 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
       year: new Date().getFullYear(),
     },
     locale,
+    onDatePress,
   } = props;
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
   const styles = makeStyle();
 
@@ -120,6 +124,22 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     return iDate === day && month === currentMonthIndex && year === currentYear;
   };
 
+  const selected = (iDate: number) => {
+    if (selectedDate) {
+      return (
+        selectedDate.date === iDate &&
+        selectedDate.month === month &&
+        selectedDate.year === year
+      );
+    }
+    return false;
+  };
+
+  const handleDayPress = (pressedDay: number) => {
+    setSelectedDate({ date: pressedDay, month: month, year: year });
+    onDatePress({ date: pressedDay, month: month, year: year });
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -136,7 +156,6 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
           <Day
             key={i}
             dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
-            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
             today={today(i + 1)}
             extraDays
           />
@@ -144,23 +163,29 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
         {month !== 13
           ? iterator(30).map((_item, i) => (
-              <Day key={i} dayNumber={i + 1} today={today(i + 1)} />
+              <Day
+                key={i}
+                dayNumber={i + 1}
+                today={today(i + 1)}
+                selected={selected(i + 1)}
+                onPress={() => handleDayPress(i + 1)}
+              />
             ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
             // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
             // ELSE IT WILL HAVE % DAYS
             iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map((_item, i) => (
-              <Day key={i} dayNumber={i + 1} today={today(i + 1)} />
+              <Day
+                key={i}
+                dayNumber={i + 1}
+                today={today(i + 1)}
+                selected={selected(i + 1)}
+                onPress={() => handleDayPress(i + 1)}
+              />
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
-          <Day
-            key={i}
-            dayNumber={i + 1}
-            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            today={today(i + 1)}
-            extraDays
-          />
+          <Day key={i} dayNumber={i + 1} today={today(i + 1)} extraDays />
         ))}
       </View>
     </View>

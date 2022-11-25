@@ -36,3 +36,9 @@ export type Theme = {
   arrowWidth?: number;
   weekVerticalMargin?: number;
 };
+
+export type SelectedDate = {
+  date: number;
+  month: number;
+  year: number;
+};

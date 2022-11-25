@@ -1,16 +1,8 @@
 import React, { Fragment } from 'react';
-import {
-  Image,
-  ImageStyle,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
+import { makeStyle } from './style';
 
 type DayProps = {
   prev: () => void;
@@ -23,89 +15,44 @@ type DayProps = {
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
   const { prev, next, month, year, locals = 'AMH', mode } = props;
+  const styles1 = makeStyle();
+
   return (
     <Fragment>
-      <View style={styles.calendarHeader}>
+      <View style={styles1.header}>
         {/* BACKWARD THE MONTH */}
-        <TouchableOpacity onPress={prev} style={styles.arrowWrapper}>
+        <TouchableOpacity onPress={prev} style={styles1.arrow}>
           <Image
             source={require('../../images/left_icon.png')}
-            style={styles.arrowStyle}
+            style={styles1.arrowImage}
           />
         </TouchableOpacity>
 
-        <View style={styles.monthAndYearTextWrapper}>
-          <Text style={styles.monthTextStyle}>
+        <View style={styles1.headerTitle}>
+          <Text style={styles1.titleText}>
             {getMonthsName({ locals, mode })[month - 1]}
           </Text>
-          <Text style={styles.yearTextStyle}>{year}</Text>
+          <View style={styles1.space} />
+          <Text style={styles1.titleText}>{year}</Text>
         </View>
 
         {/* FORWARD THE MONTH */}
-        <TouchableOpacity onPress={next} style={styles.arrowWrapper}>
+        <TouchableOpacity onPress={next} style={styles1.arrow}>
           <Image
             source={require('../../images/right_icon.png')}
-            style={styles.arrowStyle}
+            style={styles1.arrowImage}
           />
         </TouchableOpacity>
       </View>
 
       {/* LIST OF DAYS OF THE WEEK */}
-      <View style={styles.daysOfTheWeekWapper}>
+      <View style={styles1.daysHeader}>
         {getDaysNameOfTheWeek(locals).map((item, i) => (
-          <Text style={styles.dayTextStyle} key={i} numberOfLines={1}>
+          <Text style={styles1.dayText} key={i} numberOfLines={1}>
             {item}
           </Text>
         ))}
       </View>
     </Fragment>
   );
-});
-
-const styles = StyleSheet.create({
-  calendarHeader: {
-    backgroundColor: '#004E79',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  } as ViewStyle,
-  daysOfTheWeekWapper: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 5,
-    paddingTop: 20,
-  } as ViewStyle,
-  dayTextStyle: {
-    width: '14.2857143%',
-    textAlign: 'center',
-    color: '#FF7A00',
-    fontWeight: 'bold',
-  } as TextStyle,
-  monthTextStyle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  } as TextStyle,
-  yearTextStyle: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: 'bold',
-    paddingTop: 5,
-  } as TextStyle,
-  monthAndYearTextWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  } as ViewStyle,
-  arrowWrapper: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  } as ViewStyle,
-  arrowStyle: {
-    width: 12,
-    height: 24,
-    tintColor: '#FFFFFF',
-  } as ImageStyle,
 });

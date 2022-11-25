@@ -1,5 +1,5 @@
-import React, { Fragment, useCallback, useMemo, useState } from 'react';
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native';
+import React, { useCallback, useMemo, useState } from 'react';
+import { View } from 'react-native';
 import {
   ethiopicCalendar,
   toEthiopic,
@@ -9,6 +9,7 @@ import { Header } from './header';
 import { Day } from './day';
 import { iterator } from '../../utils/generics';
 import type { LanguageCode } from '../../utils/locals/types';
+import { makeStyle } from './styles';
 
 type EthiopianCalenderProps = {
   date?: { year: number; month: number; day: number };
@@ -24,6 +25,8 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     },
     locale,
   } = props;
+
+  const styles = makeStyle();
 
   const [day, _setDay] = useState(
     toEthiopic(date.year, date.month, date.day).day as number
@@ -114,7 +117,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
   }, [month]);
 
   return (
-    <Fragment>
+    <View style={styles.container}>
       <Header
         next={next}
         prev={prev}
@@ -123,104 +126,55 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         locals={locale}
         mode={'EC'}
       />
-      <View style={styles.calenderBody}>
-        <View style={[styles.daysWrapper]}>
-          {/* EXTRA DAYS IN THE CALENDAR */}
-          {iterator(firstDayOfTheMonthIndex).map((_item, i) => (
-            <Day
-              key={i}
-              dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
-              //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-              isCurrentDay={30 - firstDayOfTheMonthIndex + i + 1 === day}
-              isCurrentMonth={month === currentMonthIndex}
-              isCurrentYear={year === currentYear}
-              extraDays
-            />
-          ))}
-          {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
-          {month !== 13
-            ? iterator(30).map((_item, i) => (
-                <Day
-                  key={i}
-                  dayNumber={i + 1}
-                  isCurrentDay={i + 1 === day}
-                  isCurrentMonth={month === currentMonthIndex}
-                  isCurrentYear={year === currentYear}
-                />
-              ))
-            : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
-              // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
-              // ELSE IT WILL HAVE % DAYS
-              iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map(
-                (_item, i) => (
-                  <Day
-                    key={i}
-                    dayNumber={i + 1}
-                    isCurrentDay={i + 1 === day}
-                    isCurrentMonth={month === currentMonthIndex}
-                    isCurrentYear={year === currentYear}
-                  />
-                )
-              )}
-          {/* EXTRA DAYS IN THE CALENDAR */}
-          {iterator(nextDays).map((_item, i) => (
-            <Day
-              key={i}
-              dayNumber={i + 1}
-              //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-              isCurrentDay={i + 1 === day}
-              isCurrentMonth={month === currentMonthIndex}
-              isCurrentYear={year === currentYear}
-              extraDays
-            />
-          ))}
-        </View>
+      <View style={[styles.daysWrapper]}>
+        {/* EXTRA DAYS IN THE CALENDAR */}
+        {iterator(firstDayOfTheMonthIndex).map((_item, i) => (
+          <Day
+            key={i}
+            dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
+            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
+            isCurrentDay={30 - firstDayOfTheMonthIndex + i + 1 === day}
+            isCurrentMonth={month === currentMonthIndex}
+            isCurrentYear={year === currentYear}
+            extraDays
+          />
+        ))}
+        {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
+        {month !== 13
+          ? iterator(30).map((_item, i) => (
+              <Day
+                key={i}
+                dayNumber={i + 1}
+                isCurrentDay={i + 1 === day}
+                isCurrentMonth={month === currentMonthIndex}
+                isCurrentYear={year === currentYear}
+              />
+            ))
+          : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
+            // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
+            // ELSE IT WILL HAVE % DAYS
+            iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map((_item, i) => (
+              <Day
+                key={i}
+                dayNumber={i + 1}
+                isCurrentDay={i + 1 === day}
+                isCurrentMonth={month === currentMonthIndex}
+                isCurrentYear={year === currentYear}
+              />
+            ))}
+        {/* EXTRA DAYS IN THE CALENDAR */}
+        {iterator(nextDays).map((_item, i) => (
+          <Day
+            key={i}
+            dayNumber={i + 1}
+            //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
+            isCurrentDay={i + 1 === day}
+            isCurrentMonth={month === currentMonthIndex}
+            isCurrentYear={year === currentYear}
+            extraDays
+          />
+        ))}
       </View>
-    </Fragment>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  calendarHeader: {
-    backgroundColor: 'blue',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  } as ViewStyle,
-  calenderBody: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 5,
-  } as ViewStyle,
-  daysWrapper: {
-    flexDirection: 'row',
-    paddingTop: 5,
-    flexWrap: 'wrap',
-  } as ViewStyle,
-  date: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 15,
-  } as TextStyle,
-  dateWrapper: {
-    width: '14.2857143%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 11,
-  } as ViewStyle,
-  todayDateWrapper: {
-    borderWidth: 1,
-    borderColor: 'blue',
-  } as ViewStyle,
-
-  inactiveDate: {
-    fontSize: 15,
-    color: 'gray',
-  } as TextStyle,
-  today: {
-    borderBottomColor: 'blue',
-    borderBottomWidth: 3,
-    width: '14.2857143%',
-    marginTop: 22,
-  } as TextStyle,
-});

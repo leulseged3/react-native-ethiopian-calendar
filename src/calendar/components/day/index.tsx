@@ -1,12 +1,6 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
+import React, { useMemo } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { makeStyle } from './style';
 
 type DayProps = {
   dayNumber: number;
@@ -19,44 +13,25 @@ type DayProps = {
 export const Day: React.FC<DayProps> = React.memo((props) => {
   const { dayNumber, isCurrentDay, isCurrentMonth, isCurrentYear, extraDays } =
     props;
+  const styles1 = makeStyle();
+
+  const isToday = useMemo(() => {
+    return isCurrentDay && isCurrentMonth && isCurrentYear;
+  }, [isCurrentDay, isCurrentMonth, isCurrentYear]);
+
   return (
-    <TouchableOpacity style={[styles.dayButton]} disabled={extraDays}>
-      <View
-        style={
-          isCurrentDay && isCurrentMonth && isCurrentYear && styles.todayStyle
-        }
+    <TouchableOpacity style={[styles1.day]} disabled={extraDays}>
+      {/* <View style={isToday && styles.todayStyle}> */}
+      <Text
+        style={[
+          styles1.dayText,
+          extraDays && styles1.disabledText,
+          isToday && styles1.today,
+        ]}
       >
-        <Text style={extraDays ? styles.inactiveDate : styles.dayText}>
-          {dayNumber}
-        </Text>
-      </View>
+        {dayNumber}
+      </Text>
+      {/* </View> */}
     </TouchableOpacity>
   );
-});
-
-const styles = StyleSheet.create({
-  dayText: {
-    color: '#004E79',
-    fontWeight: 'bold',
-    fontSize: 15,
-  } as TextStyle,
-  dayButton: {
-    width: '14.2857143%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 11,
-    height: 50,
-  } as ViewStyle,
-  inactiveDate: {
-    fontSize: 15,
-    color: 'gray',
-  } as TextStyle,
-  todayStyle: {
-    width: '70%',
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#004E79',
-  } as ViewStyle,
 });

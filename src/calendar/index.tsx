@@ -6,6 +6,11 @@ import { GregorianCalendar } from './components/GregorianCalender';
 type Props = {
   mode?: Mode;
   locale?: LanguageCode;
+  hideInactiveDate?: boolean;
+  // theme?: Theme
+  initialDate?: Date; //default now
+  onDayPress?: (day: number, month: number, year: number) => void;
+  firstDayMonday?: boolean;
 };
 
 export const Calendar: React.FC<Props> = (props) => {

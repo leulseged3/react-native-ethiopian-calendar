@@ -13,20 +13,20 @@ type DayProps = {
 export const Day: React.FC<DayProps> = React.memo((props) => {
   const { dayNumber, isCurrentDay, isCurrentMonth, isCurrentYear, extraDays } =
     props;
-  const styles1 = makeStyle();
+  const styles = makeStyle();
 
   const isToday = useMemo(() => {
     return isCurrentDay && isCurrentMonth && isCurrentYear;
   }, [isCurrentDay, isCurrentMonth, isCurrentYear]);
 
   return (
-    <TouchableOpacity style={[styles1.day]} disabled={extraDays}>
+    <TouchableOpacity style={[styles.day]} disabled={extraDays}>
       {/* <View style={isToday && styles.todayStyle}> */}
       <Text
         style={[
-          styles1.dayText,
-          extraDays && styles1.disabledText,
-          isToday && styles1.today,
+          styles.dayText,
+          extraDays && styles.disabledText,
+          isToday && styles.today,
         ]}
       >
         {dayNumber}

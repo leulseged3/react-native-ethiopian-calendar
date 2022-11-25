@@ -23,6 +23,22 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'ነሐሴ',
           'ጳጉሜ',
         ];
+      case 'ORM':
+        return [
+          'FUL',
+          'ONK',
+          'SAD',
+          'MUD',
+          'AMA',
+          'GUR',
+          'BIT',
+          'EBL',
+          'CAM',
+          'WAX',
+          'ADO',
+          'HAG',
+          'PHAA',
+        ];
       case 'ENG':
         return [
           'September',

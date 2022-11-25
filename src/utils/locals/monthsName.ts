@@ -39,6 +39,22 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'HAG',
           'PHAA',
         ];
+      case 'TIR':
+        return [
+          'መስከረም',
+          'ጥቕምቲ',
+          'ሕዳር',
+          'ታሕሳስ',
+          'ጥሪ',
+          'ለካቲት',
+          'መጋቢት',
+          'ሚያዝያ',
+          'ጉንበት',
+          'ሰነ',
+          'ሓምለ',
+          'ነሓሰ',
+          'ጳጉሜ',
+        ];
       case 'ENG':
         return [
           'September',

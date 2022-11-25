@@ -5,7 +5,7 @@ export function getDaysNameOfTheWeek(language: LanguageCode) {
     case 'AMH':
       return ['እሁድ', 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሀሙስ', 'አርብ', 'ቅዳሜ'];
     case 'ENG':
-      return ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fir', 'Sat'];
+      return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fir', 'Sat'];
     default:
       return ['እሁድ', 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሀሙስ', 'አርብ', 'ቅዳሜ'];
   }

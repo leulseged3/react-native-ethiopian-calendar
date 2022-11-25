@@ -116,6 +116,10 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     }
   }, [month]);
 
+  const today = (iDate: number) => {
+    return iDate === day && month === currentMonthIndex && year === currentYear;
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -133,34 +137,20 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             key={i}
             dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
             //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            isCurrentDay={30 - firstDayOfTheMonthIndex + i + 1 === day}
-            isCurrentMonth={month === currentMonthIndex}
-            isCurrentYear={year === currentYear}
+            today={today(i + 1)}
             extraDays
           />
         ))}
         {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
         {month !== 13
           ? iterator(30).map((_item, i) => (
-              <Day
-                key={i}
-                dayNumber={i + 1}
-                isCurrentDay={i + 1 === day}
-                isCurrentMonth={month === currentMonthIndex}
-                isCurrentYear={year === currentYear}
-              />
+              <Day key={i} dayNumber={i + 1} today={today(i + 1)} />
             ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
             // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
             // ELSE IT WILL HAVE % DAYS
             iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map((_item, i) => (
-              <Day
-                key={i}
-                dayNumber={i + 1}
-                isCurrentDay={i + 1 === day}
-                isCurrentMonth={month === currentMonthIndex}
-                isCurrentYear={year === currentYear}
-              />
+              <Day key={i} dayNumber={i + 1} today={today(i + 1)} />
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
@@ -168,9 +158,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             key={i}
             dayNumber={i + 1}
             //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            isCurrentDay={i + 1 === day}
-            isCurrentMonth={month === currentMonthIndex}
-            isCurrentYear={year === currentYear}
+            today={today(i + 1)}
             extraDays
           />
         ))}

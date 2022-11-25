@@ -1,23 +1,16 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { makeStyle } from './style';
 
 type DayProps = {
   dayNumber: number;
-  isCurrentDay: boolean;
-  isCurrentMonth: boolean;
-  isCurrentYear: boolean;
+  today?: boolean;
   extraDays?: boolean;
 };
 
 export const Day: React.FC<DayProps> = React.memo((props) => {
-  const { dayNumber, isCurrentDay, isCurrentMonth, isCurrentYear, extraDays } =
-    props;
+  const { dayNumber, today, extraDays } = props;
   const styles = makeStyle();
-
-  const isToday = useMemo(() => {
-    return isCurrentDay && isCurrentMonth && isCurrentYear;
-  }, [isCurrentDay, isCurrentMonth, isCurrentYear]);
 
   return (
     <TouchableOpacity style={[styles.day]} disabled={extraDays}>
@@ -26,7 +19,7 @@ export const Day: React.FC<DayProps> = React.memo((props) => {
         style={[
           styles.dayText,
           extraDays && styles.disabledText,
-          isToday && styles.today,
+          today && styles.today,
         ]}
       >
         {dayNumber}

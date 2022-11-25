@@ -69,6 +69,14 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     return new Date().getDate();
   }, []);
 
+  const today = (iDate: number) => {
+    return (
+      iDate === currentDay &&
+      month === currentMonthIndex &&
+      year === currentYear
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -86,9 +94,6 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             key={i}
             dayNumber={lastDayOfPreviousMonth - firstDayOfTheMonthIndex + i - 1}
             //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            isCurrentDay={false}
-            isCurrentMonth={false}
-            isCurrentYear={false}
             extraDays
           />
         ))}
@@ -98,9 +103,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             key={i}
             dayNumber={i + 1}
             //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            isCurrentDay={i + 1 === currentDay}
-            isCurrentMonth={month === currentMonthIndex}
-            isCurrentYear={year === currentYear}
+            today={today(i + 1)}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
@@ -109,9 +112,6 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             key={i}
             dayNumber={i + 1}
             //BELOW FIELD(isCurrentDay) IS ALWAYS FALSE
-            isCurrentDay={false}
-            isCurrentMonth={false}
-            isCurrentYear={false}
             extraDays
           />
         ))}

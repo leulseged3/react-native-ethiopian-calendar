@@ -41,4 +41,5 @@ export const todayButtonPosition = undefined;
 export const headerBackgroundColor = FOREGROUND_COLOR;
 
 export const switchButtonColor = SECONDARY_TEXT_COLOR;
+export const localsDropdownBackgroundColor = FOREGROUND_COLOR;
 export const weekVerticalMargin = 7;

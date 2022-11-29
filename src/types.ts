@@ -35,6 +35,7 @@ export type Theme = {
   arrowWidth?: number;
 
   switchButtonColor?: string;
+  localsDropdownBackgroundColor?: string;
 };
 
 export type SelectedDate = {

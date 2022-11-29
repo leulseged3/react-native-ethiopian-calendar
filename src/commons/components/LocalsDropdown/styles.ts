@@ -60,7 +60,6 @@ export const makeStyle = (theme: Theme = {}) => {
       borderBottomWidth: 1,
       borderColor: mergedStyles.textDisabledColor,
       width: '88%',
-      marginBottom: 5,
     } as ViewStyle,
     languageButton: {
       paddingVertical: 5,

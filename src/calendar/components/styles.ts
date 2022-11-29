@@ -7,7 +7,7 @@ export const makeStyle = (theme: Theme = {}) => {
 
   return StyleSheet.create({
     container: {
-      backgroundColor: mergedStyles.backgroundColor,
+      backgroundColor: mergedStyles.calendarBackground,
       paddingHorizontal: 4,
     } as ViewStyle,
     daysWrapper: {

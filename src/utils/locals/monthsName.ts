@@ -25,19 +25,19 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
         ];
       case 'ORM':
         return [
-          'FUL',
-          'ONK',
-          'SAD',
-          'MUD',
-          'AMA',
-          'GUR',
-          'BIT',
-          'EBL',
-          'CAM',
-          'WAX',
-          'ADO',
-          'HAG',
-          'PHAA',
+          'Fuulbana',
+          'Onkololeessa',
+          'Sadaasa',
+          'Muddee',
+          'Amajjii',
+          'Guraandhala',
+          'Bitooteessa',
+          'Elba',
+          'Caamsa',
+          'Waxabajjii',
+          'Adooleessa',
+          'Hagayya',
+          'Phaagumee',
         ];
       case 'TIR':
         return [

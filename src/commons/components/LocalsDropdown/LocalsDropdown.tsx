@@ -8,13 +8,21 @@ import { makeStyle } from './styles';
 type LocalsDropdownProps = {
   theme?: Theme;
   locals: LanguageCode;
+  onLanguageChange?: (language: LanguageCode) => void;
 };
 
 export const LocalsDropDown: React.FC<LocalsDropdownProps> = React.memo(
   (props) => {
-    const { theme, locals } = props;
+    const { theme, locals, onLanguageChange } = props;
     const [showDropdown, setShowDropdown] = useState(false);
     const styles = makeStyle(theme);
+
+    const handleLanguageChange = (lang: LanguageCode) => {
+      if (onLanguageChange) {
+        onLanguageChange(lang);
+        setShowDropdown(false);
+      }
+    };
 
     return (
       <View style={styles.container}>
@@ -43,6 +51,7 @@ export const LocalsDropDown: React.FC<LocalsDropdownProps> = React.memo(
                     item.code === locals && styles.languageButtonSelected,
                   ]}
                   activeOpacity={0.7}
+                  onPress={() => handleLanguageChange(item.code)}
                 >
                   <Text
                     style={[

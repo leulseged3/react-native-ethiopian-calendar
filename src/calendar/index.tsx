@@ -12,6 +12,7 @@ type Props = {
   initialDate?: Date; //default now
   onDatePress: (date: SelectedDate) => void;
   onModeChange?: (mode: Mode) => void;
+  onLanguageChange?: (language: LanguageCode) => void;
   firstDayMonday?: boolean;
 };
 
@@ -20,8 +21,9 @@ export const Calendar: React.FC<Props> = (props) => {
     mode = 'EC',
     locale = 'AMH',
     onDatePress,
-    theme,
     onModeChange,
+    onLanguageChange,
+    theme,
   } = props;
   if (mode === 'EC')
     return (
@@ -30,6 +32,7 @@ export const Calendar: React.FC<Props> = (props) => {
         onDatePress={onDatePress}
         theme={theme}
         onModeChange={onModeChange}
+        onLanguageChange={onLanguageChange}
       />
     );
   return (

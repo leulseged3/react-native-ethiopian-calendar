@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
-import type { SelectedDate } from 'src/types';
+import type { SelectedDate, Theme } from 'src/types';
 import { iterator } from '../../utils/generics/array';
 import { Day } from './day';
 import { Header } from './header';
@@ -8,10 +8,11 @@ import { makeStyle } from './styles';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
+  theme?: Theme;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
-  const { onDatePress } = props;
+  const { onDatePress, theme } = props;
 
   const [date, _setDate] = useState(1);
   const [month, setMonth] = useState(() => new Date().getMonth() + 1);
@@ -19,7 +20,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
 
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
-  const styles = makeStyle();
+  const styles = makeStyle(theme);
 
   const lastDayOfTheCurrentMonth = useMemo(() => {
     return new Date(year, month, 0).getDate();
@@ -106,6 +107,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         year={year}
         locals={'ENG'}
         mode="GC"
+        theme={theme}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}
@@ -114,6 +116,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             key={i}
             dayNumber={lastDayOfPreviousMonth - firstDayOfTheMonthIndex + i - 1}
             extraDays
+            theme={theme}
           />
         ))}
         {/* DAYS OF THE MONTH*/}
@@ -124,11 +127,12 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             today={today(i + 1)}
             selected={selected(i + 1)}
             onPress={() => handleDayPress(i + 1)}
+            theme={theme}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
-          <Day key={i} dayNumber={i + 1} extraDays />
+          <Day key={i} dayNumber={i + 1} extraDays theme={theme} />
         ))}
       </View>
     </View>

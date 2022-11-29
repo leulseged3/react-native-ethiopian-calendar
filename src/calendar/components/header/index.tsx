@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
 import { makeStyle } from './style';
+import type { Theme } from 'src/types';
 
 type DayProps = {
   prev: () => void;
@@ -11,11 +12,12 @@ type DayProps = {
   year: number;
   locals: LanguageCode;
   mode: Mode;
+  theme?: Theme;
 };
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
-  const { prev, next, month, year, locals = 'AMH', mode } = props;
-  const styles = makeStyle();
+  const { prev, next, month, year, locals = 'AMH', mode, theme } = props;
+  const styles = makeStyle(theme);
 
   return (
     <Fragment>

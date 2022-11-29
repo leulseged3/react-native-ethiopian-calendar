@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import type { Theme } from 'src/types';
 import { makeStyle } from './style';
 
 type DayProps = {
@@ -8,11 +9,12 @@ type DayProps = {
   extraDays?: boolean;
   selected?: boolean;
   onPress?: () => void;
+  theme?: Theme;
 };
 
 export const Day: React.FC<DayProps> = React.memo((props) => {
-  const { dayNumber, today, extraDays, onPress, selected } = props;
-  const styles = makeStyle();
+  const { dayNumber, today, extraDays, onPress, selected, theme } = props;
+  const styles = makeStyle(theme);
 
   return (
     <TouchableOpacity

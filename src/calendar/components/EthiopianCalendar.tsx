@@ -10,12 +10,13 @@ import { Day } from './day';
 import { iterator } from '../../utils/generics';
 import type { LanguageCode } from '../../utils/locals/types';
 import { makeStyle } from './styles';
-import type { SelectedDate } from 'src/types';
+import type { SelectedDate, Theme } from 'src/types';
 
 type EthiopianCalenderProps = {
   date?: { year: number; month: number; day: number };
   locale: LanguageCode;
   onDatePress: (date: SelectedDate) => void;
+  theme?: Theme;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -27,10 +28,11 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     },
     locale,
     onDatePress,
+    theme,
   } = props;
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
-  const styles = makeStyle();
+  const styles = makeStyle(theme);
 
   const [day, _setDay] = useState(
     toEthiopic(date.year, date.month, date.day).day as number
@@ -149,6 +151,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         year={year}
         locals={locale}
         mode={'EC'}
+        theme={theme}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}
@@ -158,6 +161,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
             today={today(i + 1)}
             extraDays
+            theme={theme}
           />
         ))}
         {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
@@ -169,6 +173,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 today={today(i + 1)}
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
+                theme={theme}
               />
             ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
@@ -181,11 +186,18 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 today={today(i + 1)}
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
+                theme={theme}
               />
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
-          <Day key={i} dayNumber={i + 1} today={today(i + 1)} extraDays />
+          <Day
+            key={i}
+            dayNumber={i + 1}
+            today={today(i + 1)}
+            extraDays
+            theme={theme}
+          />
         ))}
       </View>
     </View>

@@ -6,6 +6,8 @@ export function getDaysNameOfTheWeek(language: LanguageCode) {
       return ['እሁድ', 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሀሙስ', 'አርብ', 'ቅዳሜ'];
     case 'ORM':
       return ['SAM', 'WIX', 'KIB', 'ROB', 'KAM', 'JIM', 'DIL'];
+    case 'SOM':
+      return ['AXA', 'ISN', 'TAL', 'ARB', 'KHA', 'JIM', 'SAB'];
     case 'TIR':
       return ['ሰንበት', 'ሰኑይ', 'ሰሉስ', 'ረቡዕ', 'ሓሙስ', 'ዓርቢ', 'ቀዳም'];
     case 'ENG':

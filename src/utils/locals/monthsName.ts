@@ -70,6 +70,22 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'July',
           'August',
         ];
+      case 'SOM':
+        return [
+          'Setembar',
+          'Oktoobar',
+          'November',
+          'December',
+          'Janaayo',
+          'Febraayo',
+          'Maarso',
+          'Abriil',
+          'Maye',
+          'Juun',
+          'Julay',
+          'Ogost',
+          'Pagume',
+        ];
       default:
         return [
           'መስከረም',

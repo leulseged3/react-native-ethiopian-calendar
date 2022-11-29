@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode } from 'src/utils/locals/types';
 import type { Theme } from '../../../types';
 import { getLocalLabel, languageNames } from '../../../utils/locals';
@@ -18,9 +18,10 @@ export const LocalsDropDown: React.FC<LocalsDropdownProps> = React.memo(
 
     return (
       <View style={styles.container}>
-        <Pressable
+        <TouchableOpacity
           style={styles.dropdownButtonStyle}
           onPress={() => setShowDropdown(!showDropdown)}
+          activeOpacity={0.9}
         >
           <Text style={styles.labelText}>{getLocalLabel(locals)}</Text>
           <Image
@@ -31,14 +32,27 @@ export const LocalsDropDown: React.FC<LocalsDropdownProps> = React.memo(
             }
             style={styles.dropdownIconStyle}
           />
-        </Pressable>
+        </TouchableOpacity>
         {showDropdown && (
           <View style={styles.dropdownContainer}>
             {languageNames.map((item, index) => (
               <View key={index} style={styles.languageButtonContainer}>
-                <Pressable style={styles.languageButton}>
-                  <Text style={styles.languageTextStyle}>{item.name}</Text>
-                </Pressable>
+                <TouchableOpacity
+                  style={[
+                    styles.languageButton,
+                    item.code === locals && styles.languageButtonSelected,
+                  ]}
+                  activeOpacity={0.7}
+                >
+                  <Text
+                    style={[
+                      styles.languageTextStyle,
+                      locals === item.code && styles.languageTextSelected,
+                    ]}
+                  >
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
                 {index < languageNames.length - 1 && (
                   <View style={styles.dividerStyle} />
                 )}

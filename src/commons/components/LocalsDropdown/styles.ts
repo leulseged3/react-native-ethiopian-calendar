@@ -64,6 +64,11 @@ export const makeStyle = (theme: Theme = {}) => {
     } as ViewStyle,
     languageButton: {
       paddingVertical: 5,
+      width: '100%',
+      alignItems: 'center',
+    } as ViewStyle,
+    languageButtonSelected: {
+      backgroundColor: mergedStyles.selectedDayBackgroundColor,
     } as ViewStyle,
     languageButtonContainer: {
       width: '100%',
@@ -74,6 +79,9 @@ export const makeStyle = (theme: Theme = {}) => {
       fontFamily: mergedStyles.textDayFontFamily,
       fontWeight: mergedStyles.textDayFontWeight,
       color: mergedStyles.dayTextColor,
+    } as TextStyle,
+    languageTextSelected: {
+      color: mergedStyles.selectedDayTextColor,
     } as TextStyle,
   });
 };

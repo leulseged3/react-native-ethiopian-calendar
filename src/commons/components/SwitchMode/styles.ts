@@ -7,8 +7,8 @@ export const makeStyle = (theme: Theme = {}) => {
 
   return StyleSheet.create({
     container: {
-      width: 40,
-      height: 22,
+      width: 50,
+      height: 25,
       borderRadius: 20,
       borderWidth: 1,
       borderColor: mergedStyles.switchButtonColor,
@@ -16,16 +16,17 @@ export const makeStyle = (theme: Theme = {}) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingHorizontal: 4,
+      marginVertical: 4,
     } as ViewStyle,
     toggleCircle: {
-      width: 15,
-      height: 15,
+      width: 18,
+      height: 18,
       backgroundColor: mergedStyles.switchButtonColor,
       borderRadius: 10,
     } as ViewStyle,
     text: {
       color: mergedStyles.switchButtonColor,
-      fontSize: 10,
+      fontSize: 14,
     } as TextStyle,
   });
 };

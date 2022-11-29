@@ -1,7 +1,6 @@
 import type { TextStyle, ViewStyle } from 'react-native';
 
 export type Theme = {
-  contentStyle?: ViewStyle;
   todayTextColor?: string;
   calendarBackground?: string;
   textSectionTitleColor?: string;
@@ -13,7 +12,6 @@ export type Theme = {
   textDisabledColor?: string;
   textInactiveColor?: string;
   backgroundColor?: string;
-  selectedDotColor?: string;
   disabledArrowColor?: string;
   textDayFontFamily?: TextStyle['fontFamily'];
   textMonthFontFamily?: TextStyle['fontFamily'];
@@ -34,7 +32,6 @@ export type Theme = {
   todayButtonPosition?: string;
   arrowHeight?: number;
   arrowWidth?: number;
-  weekVerticalMargin?: number;
 };
 
 export type SelectedDate = {

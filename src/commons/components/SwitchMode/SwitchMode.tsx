@@ -24,6 +24,7 @@ export const SwitchMode: React.FC<SwitchModeProps> = (props) => {
           break;
         case 'GC':
           onModeChange('EC');
+          break;
       }
     }
   };

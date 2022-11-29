@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import type { Theme } from 'src/types';
 import type { Mode } from 'src/utils/locals/types';
@@ -6,21 +6,25 @@ import { makeStyle } from './styles';
 
 type SwitchModeProps = {
   theme?: Theme;
+  mode: Mode;
+  onModeChange?: (mode: Mode) => void;
 };
 
 export const SwitchMode: React.FC<SwitchModeProps> = (props) => {
-  const { theme } = props;
-  const [mode, setMode] = useState<Mode>('EC');
+  const { theme, mode, onModeChange } = props;
+  // const [ setMode] = useState<Mode>('EC');
 
   const styles = makeStyle(theme);
 
   const toggleMode = () => {
-    switch (mode) {
-      case 'EC':
-        setMode('GC');
-        break;
-      case 'GC':
-        setMode('EC');
+    if (onModeChange) {
+      switch (mode) {
+        case 'EC':
+          onModeChange('GC');
+          break;
+        case 'GC':
+          onModeChange('EC');
+      }
     }
   };
 

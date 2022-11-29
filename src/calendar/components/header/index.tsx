@@ -14,16 +14,26 @@ type DayProps = {
   locals: LanguageCode;
   mode: Mode;
   theme?: Theme;
+  onModeChange?: (mode: Mode) => void;
 };
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
-  const { prev, next, month, year, locals = 'AMH', mode, theme } = props;
+  const {
+    prev,
+    next,
+    month,
+    year,
+    locals = 'AMH',
+    mode,
+    theme,
+    onModeChange,
+  } = props;
   const styles = makeStyle(theme);
 
   return (
     <View>
       <View style={styles.headerButtonsWrapper}>
-        <SwitchMode theme={theme} />
+        <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
         <LocalsDropDown theme={theme} locals={locals} />
       </View>
       <View style={styles.mainHeader}>

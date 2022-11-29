@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import type { SelectedDate, Theme } from 'src/types';
+import type { Mode } from '../../utils/locals/types';
 import { iterator } from '../../utils/generics/array';
 import { Day } from './day';
 import { Header } from './header';
@@ -8,11 +9,12 @@ import { makeStyle } from './styles';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
+  onModeChange?: (mode: Mode) => void;
   theme?: Theme;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
-  const { onDatePress, theme } = props;
+  const { onDatePress, theme, onModeChange } = props;
 
   const [date, _setDate] = useState(1);
   const [month, setMonth] = useState(() => new Date().getMonth() + 1);
@@ -108,6 +110,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         locals={'ENG'}
         mode="GC"
         theme={theme}
+        onModeChange={onModeChange}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}

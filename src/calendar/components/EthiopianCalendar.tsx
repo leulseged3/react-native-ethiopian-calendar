@@ -8,7 +8,7 @@ import {
 import { Header } from './header';
 import { Day } from './day';
 import { iterator } from '../../utils/generics';
-import type { LanguageCode } from '../../utils/locals/types';
+import type { LanguageCode, Mode } from '../../utils/locals/types';
 import { makeStyle } from './styles';
 import type { SelectedDate, Theme } from 'src/types';
 
@@ -17,6 +17,7 @@ type EthiopianCalenderProps = {
   locale: LanguageCode;
   onDatePress: (date: SelectedDate) => void;
   theme?: Theme;
+  onModeChange?: (mode: Mode) => void;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -28,6 +29,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     },
     locale,
     onDatePress,
+    onModeChange,
     theme,
   } = props;
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
@@ -152,6 +154,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         locals={locale}
         mode={'EC'}
         theme={theme}
+        onModeChange={onModeChange}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}

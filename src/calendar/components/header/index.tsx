@@ -16,6 +16,7 @@ type DayProps = {
   theme?: Theme;
   onModeChange?: (mode: Mode) => void;
   onLanguageChange?: (language: LanguageCode) => void;
+  hideHeaderButtons?: boolean;
 };
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
@@ -29,21 +30,26 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
     theme,
     onModeChange,
     onLanguageChange,
+    hideHeaderButtons,
   } = props;
   const styles = makeStyle(theme);
 
   return (
     <View>
-      <View style={styles.headerButtonsWrapper}>
-        <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
-        {mode === 'EC' && (
-          <LocalsDropDown
-            theme={theme}
-            locals={locals}
-            onLanguageChange={onLanguageChange}
-          />
-        )}
-      </View>
+      {/* EXTRA HEADER */}
+      {!hideHeaderButtons && (
+        <View style={styles.headerButtonsWrapper}>
+          <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
+          {mode === 'EC' && (
+            <LocalsDropDown
+              theme={theme}
+              locals={locals}
+              onLanguageChange={onLanguageChange}
+            />
+          )}
+        </View>
+      )}
+
       <View style={styles.mainHeader}>
         {/* BACKWARD THE MONTH */}
         <TouchableOpacity onPress={prev} style={styles.arrow}>

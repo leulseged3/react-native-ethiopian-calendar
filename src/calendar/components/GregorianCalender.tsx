@@ -11,10 +11,11 @@ type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
   onModeChange?: (mode: Mode) => void;
   theme?: Theme;
+  hideHeaderButtons?: boolean;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
-  const { onDatePress, theme, onModeChange } = props;
+  const { onDatePress, theme, onModeChange, hideHeaderButtons } = props;
 
   const [date, _setDate] = useState(1);
   const [month, setMonth] = useState(() => new Date().getMonth() + 1);
@@ -111,6 +112,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         mode="GC"
         theme={theme}
         onModeChange={onModeChange}
+        hideHeaderButtons={hideHeaderButtons}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}

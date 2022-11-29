@@ -9,7 +9,7 @@ type Props = {
   locale?: LanguageCode;
   hideInactiveDate?: boolean;
   theme?: Theme;
-  initialDate?: Date; //default now
+  hideHeaderButtons?: boolean;
   onDatePress: (date: SelectedDate) => void;
   onModeChange?: (mode: Mode) => void;
   onLanguageChange?: (language: LanguageCode) => void;
@@ -23,6 +23,7 @@ export const Calendar: React.FC<Props> = (props) => {
     onDatePress,
     onModeChange,
     onLanguageChange,
+    hideHeaderButtons,
     theme,
   } = props;
   if (mode === 'EC')
@@ -33,6 +34,7 @@ export const Calendar: React.FC<Props> = (props) => {
         theme={theme}
         onModeChange={onModeChange}
         onLanguageChange={onLanguageChange}
+        hideHeaderButtons={hideHeaderButtons}
       />
     );
   return (
@@ -40,6 +42,7 @@ export const Calendar: React.FC<Props> = (props) => {
       onDatePress={onDatePress}
       theme={theme}
       onModeChange={onModeChange}
+      hideHeaderButtons={hideHeaderButtons}
     />
   );
 };

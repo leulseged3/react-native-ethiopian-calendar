@@ -19,6 +19,7 @@ type EthiopianCalenderProps = {
   theme?: Theme;
   onModeChange?: (mode: Mode) => void;
   onLanguageChange?: (language: LanguageCode) => void;
+  hideHeaderButtons?: boolean;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -33,6 +34,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     onModeChange,
     onLanguageChange,
     theme,
+    hideHeaderButtons,
   } = props;
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
@@ -158,6 +160,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         theme={theme}
         onModeChange={onModeChange}
         onLanguageChange={onLanguageChange}
+        hideHeaderButtons={hideHeaderButtons}
       />
       <View style={[styles.daysWrapper]}>
         {/* EXTRA DAYS IN THE CALENDAR */}

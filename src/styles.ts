@@ -38,5 +38,7 @@ export const disabledArrowColor = DISABLED_COLOR;
 export const titleTextColor = DEFAULT_TEXT_COLOR;
 export const todayButtonTextColor = SECONDARY_TEXT_COLOR;
 export const todayButtonPosition = undefined;
+export const headerBackgroundColor = FOREGROUND_COLOR;
 
+export const switchButtonColor = SECONDARY_TEXT_COLOR;
 export const weekVerticalMargin = 7;

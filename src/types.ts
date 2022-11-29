@@ -19,6 +19,7 @@ export type Theme = {
   textDayFontWeight?: TextStyle['fontWeight'];
   textMonthFontWeight?: TextStyle['fontWeight'];
   textDayHeaderFontWeight?: TextStyle['fontWeight'];
+  headerBackgroundColor?: string;
   textDayFontSize?: number;
   textMonthFontSize?: number;
   textDayHeaderFontSize?: number;
@@ -32,6 +33,8 @@ export type Theme = {
   todayButtonPosition?: string;
   arrowHeight?: number;
   arrowWidth?: number;
+
+  switchButtonColor?: string;
 };
 
 export type SelectedDate = {

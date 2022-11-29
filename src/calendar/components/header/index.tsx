@@ -36,11 +36,13 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
     <View>
       <View style={styles.headerButtonsWrapper}>
         <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
-        <LocalsDropDown
-          theme={theme}
-          locals={locals}
-          onLanguageChange={onLanguageChange}
-        />
+        {mode === 'EC' && (
+          <LocalsDropDown
+            theme={theme}
+            locals={locals}
+            onLanguageChange={onLanguageChange}
+          />
+        )}
       </View>
       <View style={styles.mainHeader}>
         {/* BACKWARD THE MONTH */}

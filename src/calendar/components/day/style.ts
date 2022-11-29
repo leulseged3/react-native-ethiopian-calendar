@@ -18,6 +18,7 @@ export const makeStyle = (theme: Theme = {}) => {
       fontFamily: mergedStyles.textDayFontFamily,
       fontWeight: mergedStyles.textDayFontWeight,
       color: mergedStyles.dayTextColor,
+      ...mergedStyles.textDayStyle,
     } as TextStyle,
     disabledText: {
       color: mergedStyles.textDisabledColor,
@@ -34,7 +35,7 @@ export const makeStyle = (theme: Theme = {}) => {
       borderRadius: 20,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: mergedStyles.todayTextColor,
+      backgroundColor: mergedStyles.selectedDayBackgroundColor,
     } as ViewStyle,
   });
 };

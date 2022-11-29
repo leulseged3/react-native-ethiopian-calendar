@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
 import { makeStyle } from './style';
-import type { Theme } from 'src/types';
+import type { Theme } from '../../../types';
+import { LocalsDropDown, SwitchMode } from '../../../commons/components';
 
 type DayProps = {
   prev: () => void;
@@ -20,8 +21,12 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
   const styles = makeStyle(theme);
 
   return (
-    <Fragment>
-      <View style={styles.header}>
+    <View>
+      <View style={styles.headerButtonsWrapper}>
+        <SwitchMode theme={theme} />
+        <LocalsDropDown theme={theme} />
+      </View>
+      <View style={styles.mainHeader}>
         {/* BACKWARD THE MONTH */}
         <TouchableOpacity onPress={prev} style={styles.arrow}>
           <Image
@@ -55,6 +60,6 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
           </Text>
         ))}
       </View>
-    </Fragment>
+    </View>
   );
 });

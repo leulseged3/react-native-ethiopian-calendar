@@ -6,15 +6,24 @@ export const makeStyle = (theme: Theme = {}) => {
   const mergedStyles = { ...defaultStyles, ...theme };
 
   return StyleSheet.create({
-    header: {
-      backgroundColor: mergedStyles.backgroundColor,
+    mainHeader: {
+      backgroundColor: mergedStyles.headerBackgroundColor,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
     } as ViewStyle,
+    headerButtonsWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 15,
+      backgroundColor: mergedStyles.headerBackgroundColor,
+      padding: 10,
+      zIndex: 9999,
+    } as ViewStyle,
     daysHeader: {
       flexDirection: 'row',
-      backgroundColor: mergedStyles.backgroundColor,
+      backgroundColor: mergedStyles.headerBackgroundColor,
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingTop: 20,

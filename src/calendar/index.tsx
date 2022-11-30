@@ -5,15 +5,45 @@ import { EthiopianCalender } from './components/EthiopianCalendar';
 import { GregorianCalendar } from './components/GregorianCalender';
 
 type Props = {
+  /**
+   * set to 'EC' or 'GC' to switch between Gregorian calendar & Ethiopian calendar.
+   * the default value is EC
+   * @type {Mode}
+   */
   mode?: Mode;
+  /**
+   * to change the language of days names and months names.
+   * the default 'ENG' for Gregorian calendar & 'AMH' for Ethiopian calendar.
+   * @type {LanguageCode}
+   */
   locale?: LanguageCode;
-  hideInactiveDate?: boolean;
+  /**
+   * to override default style
+   *
+   * @type {Theme}
+   */
   theme?: Theme;
+  /**
+   * to hide switch mode & change language dropdowns.
+   *
+   * @type {boolean}
+   */
   hideHeaderButtons?: boolean;
+  /**
+   * a callback gets executed when date press event is fired.
+   *
+   */
   onDatePress: (date: SelectedDate) => void;
+  /**
+   * a callback invoked on mode change.
+   *
+   */
   onModeChange?: (mode: Mode) => void;
+  /**
+   * a callback invoked on language change.
+   *
+   */
   onLanguageChange?: (language: LanguageCode) => void;
-  firstDayMonday?: boolean;
 };
 
 export const Calendar: React.FC<Props> = (props) => {

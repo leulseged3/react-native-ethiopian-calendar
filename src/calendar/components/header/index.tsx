@@ -1,16 +1,10 @@
-import React, { Fragment } from 'react';
-import {
-  Image,
-  ImageStyle,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
+import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
+import { makeStyle } from './style';
+import type { Theme } from '../../../types';
+import { LocalsDropDown, SwitchMode } from '../../../commons/components';
 
 type DayProps = {
   prev: () => void;
@@ -19,93 +13,77 @@ type DayProps = {
   year: number;
   locals: LanguageCode;
   mode: Mode;
+  theme?: Theme;
+  onModeChange?: (mode: Mode) => void;
+  onLanguageChange?: (language: LanguageCode) => void;
+  hideHeaderButtons?: boolean;
 };
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
-  const { prev, next, month, year, locals = 'AMH', mode } = props;
+  const {
+    prev,
+    next,
+    month,
+    year,
+    locals = 'AMH',
+    mode,
+    theme,
+    onModeChange,
+    onLanguageChange,
+    hideHeaderButtons,
+  } = props;
+  const styles = makeStyle(theme);
+
   return (
-    <Fragment>
-      <View style={styles.calendarHeader}>
+    <View>
+      {/* EXTRA HEADER */}
+      {!hideHeaderButtons && (
+        <View style={styles.headerButtonsWrapper}>
+          <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
+          {mode === 'EC' && (
+            <LocalsDropDown
+              theme={theme}
+              locals={locals}
+              onLanguageChange={onLanguageChange}
+            />
+          )}
+        </View>
+      )}
+
+      <View style={styles.mainHeader}>
         {/* BACKWARD THE MONTH */}
-        <TouchableOpacity onPress={prev} style={styles.arrowWrapper}>
+        <TouchableOpacity onPress={prev} style={styles.arrow}>
           <Image
             source={require('../../images/left_icon.png')}
-            style={styles.arrowStyle}
+            style={styles.arrowImage}
           />
         </TouchableOpacity>
 
-        <View style={styles.monthAndYearTextWrapper}>
-          <Text style={styles.monthTextStyle}>
+        <View style={styles.headerTitle}>
+          <Text style={styles.titleText}>
             {getMonthsName({ locals, mode })[month - 1]}
           </Text>
-          <Text style={styles.yearTextStyle}>{year}</Text>
+          <View style={styles.space} />
+          <Text style={styles.titleText}>{year}</Text>
         </View>
 
         {/* FORWARD THE MONTH */}
-        <TouchableOpacity onPress={next} style={styles.arrowWrapper}>
+        <TouchableOpacity onPress={next} style={styles.arrow}>
           <Image
             source={require('../../images/right_icon.png')}
-            style={styles.arrowStyle}
+            style={styles.arrowImage}
           />
         </TouchableOpacity>
       </View>
 
       {/* LIST OF DAYS OF THE WEEK */}
-      <View style={styles.daysOfTheWeekWapper}>
+      <View style={styles.daysHeader}>
         {getDaysNameOfTheWeek(locals).map((item, i) => (
-          <Text style={styles.dayTextStyle} key={i} numberOfLines={1}>
+          <Text style={styles.dayText} key={i} numberOfLines={1}>
             {item}
           </Text>
         ))}
       </View>
-    </Fragment>
+    </View>
   );
-});
-
-const styles = StyleSheet.create({
-  calendarHeader: {
-    backgroundColor: '#004E79',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-  } as ViewStyle,
-  daysOfTheWeekWapper: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 5,
-    paddingTop: 20,
-  } as ViewStyle,
-  dayTextStyle: {
-    width: '14.2857143%',
-    textAlign: 'center',
-    color: '#FF7A00',
-    fontWeight: 'bold',
-  } as TextStyle,
-  monthTextStyle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  } as TextStyle,
-  yearTextStyle: {
-    color: '#fff',
-    fontSize: 13,
-    fontWeight: 'bold',
-    paddingTop: 5,
-  } as TextStyle,
-  monthAndYearTextWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  } as ViewStyle,
-  arrowWrapper: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  } as ViewStyle,
-  arrowStyle: {
-    width: 12,
-    height: 24,
-    tintColor: '#FFFFFF',
-  } as ImageStyle,
 });

@@ -23,6 +23,38 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'ነሐሴ',
           'ጳጉሜ',
         ];
+      case 'ORM':
+        return [
+          'Fuulbana',
+          'Onkololeessa',
+          'Sadaasa',
+          'Muddee',
+          'Amajjii',
+          'Guraandhala',
+          'Bitooteessa',
+          'Elba',
+          'Caamsa',
+          'Waxabajjii',
+          'Adooleessa',
+          'Hagayya',
+          'Phaagumee',
+        ];
+      case 'TIR':
+        return [
+          'መስከረም',
+          'ጥቕምቲ',
+          'ሕዳር',
+          'ታሕሳስ',
+          'ጥሪ',
+          'ለካቲት',
+          'መጋቢት',
+          'ሚያዝያ',
+          'ጉንበት',
+          'ሰነ',
+          'ሓምለ',
+          'ነሓሰ',
+          'ጳጉሜ',
+        ];
       case 'ENG':
         return [
           'September',
@@ -37,6 +69,22 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'June',
           'July',
           'August',
+        ];
+      case 'SOM':
+        return [
+          'Setembar',
+          'Oktoobar',
+          'November',
+          'December',
+          'Janaayo',
+          'Febraayo',
+          'Maarso',
+          'Abriil',
+          'Maye',
+          'Juun',
+          'Julay',
+          'Ogost',
+          'Pagume',
         ];
       default:
         return [

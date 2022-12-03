@@ -61,7 +61,7 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
 
         <View style={styles.headerTitle}>
           <Text style={styles.titleText}>
-            {getMonthsName({ locals })[month - 1]}
+            {getMonthsName({ locals, mode })[month - 1]}
           </Text>
           <View style={styles.space} />
           <Text style={styles.titleText}>{year}</Text>

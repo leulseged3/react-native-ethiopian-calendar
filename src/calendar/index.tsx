@@ -66,8 +66,6 @@ export const Calendar: React.FC<Props> = (props) => {
 
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
-  console.log(selectedDate);
-
   if (mode === 'EC')
     return (
       <EthiopianCalender

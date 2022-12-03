@@ -34,7 +34,6 @@ export class EthiopicCalendar implements ICalendar {
     if (month < 1 || month > 13) {
       throw new CalendarError('INVALID_MONTH');
     }
-    // console.log(year, " ",month, " ",day)
     // The 13th month cannot be more than 5 or 6 days.
     const leapMaxDays = this.isLeap(year) ? 6 : 5;
     if (month === 13 && day > leapMaxDays) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { SelectedDate, Theme } from 'src/types';
 import type { LanguageCode, Mode } from '../utils/locals/types';
 import { EthiopianCalender } from './components/EthiopianCalendar';
@@ -44,6 +44,12 @@ type Props = {
    *
    */
   onLanguageChange?: (language: LanguageCode) => void;
+  /**
+   * if this prop is not set, the calendar will start from current month.
+   * ONLY GREGORIAN DATE
+   * @type {Date}
+   */
+  initialDate?: Date;
 };
 
 export const Calendar: React.FC<Props> = (props) => {
@@ -55,24 +61,48 @@ export const Calendar: React.FC<Props> = (props) => {
     onLanguageChange,
     hideHeaderButtons,
     theme,
+    initialDate,
   } = props;
+
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>();
+
+  console.log(selectedDate);
+
   if (mode === 'EC')
     return (
       <EthiopianCalender
+        date={
+          initialDate && {
+            year: initialDate?.getFullYear(),
+            month: initialDate?.getMonth() + 1,
+            day: initialDate?.getDate(),
+          }
+        }
         locale={locale}
         onDatePress={onDatePress}
         theme={theme}
         onModeChange={onModeChange}
         onLanguageChange={onLanguageChange}
         hideHeaderButtons={hideHeaderButtons}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
       />
     );
   return (
     <GregorianCalendar
+      date={
+        initialDate && {
+          year: initialDate?.getFullYear(),
+          month: initialDate?.getMonth() + 1,
+          day: initialDate?.getDate(),
+        }
+      }
       onDatePress={onDatePress}
       theme={theme}
       onModeChange={onModeChange}
       hideHeaderButtons={hideHeaderButtons}
+      selectedDate={selectedDate}
+      setSelectedDate={setSelectedDate}
     />
   );
 };

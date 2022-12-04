@@ -10,6 +10,8 @@ export function getDaysNameOfTheWeek(language: LanguageCode) {
       return ['AXA', 'ISN', 'TAL', 'ARB', 'KHA', 'JIM', 'SAB'];
     case 'TIR':
       return ['ሰንበት', 'ሰኑይ', 'ሰሉስ', 'ረቡዕ', 'ሓሙስ', 'ዓርቢ', 'ቀዳም'];
+    case 'AAR':
+      return ['ACA', 'ETL', 'TAL', 'ARB', 'KAM', 'GUM', 'SAB'];
     case 'ENG':
       return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fir', 'Sat'];
     default:

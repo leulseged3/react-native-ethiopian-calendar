@@ -86,6 +86,22 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
           'Ogost',
           'Pagume',
         ];
+      case 'AAR':
+        return [
+          'Waysu',
+          'Diteli',
+          'Ximoli',
+          'Kaxxa-Garablu',
+          'Qunxa-Garablu',
+          'Naharsi-Kudo',
+          'Ciggilta-Kudo',
+          'Agda-Baxisso',
+          'Caxah-Alsa',
+          'Qasa-Dirri',
+          'Qado-Dirri',
+          'Laqeeni',
+          'Pagume',
+        ];
       default:
         return [
           'መስከረም',
@@ -104,52 +120,19 @@ export function getMonthsName({ locals, mode }: GetMonthsNameParams) {
         ];
     }
   } else {
-    switch (locals) {
-      case 'AMH':
-        return [
-          'ጥር',
-          'የካቲት',
-          'መጋቢት',
-          'ሚያዝያ',
-          'ግንቦት',
-          'ሰኔ',
-          'ሐምሌ',
-          'ነሐሴ',
-          'መስከረም',
-          'ጥቅምት',
-          'ሕዳር',
-          'ታህሳስ',
-        ];
-      case 'ENG':
-        return [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ];
-      default:
-        return [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ];
-    }
+    return [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
   }
 }

@@ -20,6 +20,10 @@ type EthiopianCalenderProps = {
   onModeChange?: (mode: Mode) => void;
   onLanguageChange?: (language: LanguageCode) => void;
   hideHeaderButtons?: boolean;
+  selectedDate: SelectedDate | undefined;
+  setSelectedDate: React.Dispatch<
+    React.SetStateAction<SelectedDate | undefined>
+  >;
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -35,21 +39,28 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     onLanguageChange,
     theme,
     hideHeaderButtons,
+    selectedDate,
+    setSelectedDate,
   } = props;
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>();
 
   const styles = makeStyle(theme);
 
   const [day, _setDay] = useState(
-    toEthiopic(date.year, date.month, date.day).day as number
+    selectedDate
+      ? selectedDate.ethiopian.date
+      : (toEthiopic(date.year, date.month, date.day).day as number)
   );
 
   const [month, setMonth] = useState(
-    toEthiopic(date.year, date.month, date.day).month as number
+    selectedDate
+      ? selectedDate.ethiopian.month
+      : (toEthiopic(date.year, date.month, date.day).month as number)
   );
 
   const [year, setYear] = useState(
-    toEthiopic(date.year, date.month, date.day).year as number
+    selectedDate
+      ? selectedDate.ethiopian.year
+      : (toEthiopic(date.year, date.month, date.day).year as number)
   );
 
   const firstDayOfTheMonthIndex = useMemo(() => {
@@ -135,17 +146,41 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
   const selected = (iDate: number) => {
     if (selectedDate) {
       return (
-        selectedDate.date === iDate &&
-        selectedDate.month === month &&
-        selectedDate.year === year
+        selectedDate.ethiopian.date === iDate &&
+        selectedDate.ethiopian.month === month &&
+        selectedDate.ethiopian.year === year
       );
     }
     return false;
   };
 
   const handleDayPress = (pressedDay: number) => {
-    setSelectedDate({ date: pressedDay, month: month, year: year });
-    onDatePress({ date: pressedDay, month: month, year: year });
+    const toGregorianDate = toGregorian(year, month, pressedDay);
+    setSelectedDate({
+      ethiopian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+      gregorian: {
+        date: toGregorianDate.day as number,
+        month: toGregorianDate.month as number,
+        year: toGregorianDate.year as number,
+      },
+    });
+
+    onDatePress({
+      ethiopian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+      gregorian: {
+        date: toGregorianDate.day as number,
+        month: toGregorianDate.month as number,
+        year: toGregorianDate.year as number,
+      },
+    });
   };
 
   return (

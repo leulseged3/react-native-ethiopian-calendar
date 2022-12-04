@@ -6,22 +6,42 @@ import { iterator } from '../../utils/generics/array';
 import { Day } from './day';
 import { Header } from './header';
 import { makeStyle } from './styles';
+import { toEthiopic } from '../../utils/Calendar';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
   onModeChange?: (mode: Mode) => void;
   theme?: Theme;
   hideHeaderButtons?: boolean;
+  date?: { year: number; month: number; day: number };
+  selectedDate: SelectedDate | undefined;
+  setSelectedDate: React.Dispatch<
+    React.SetStateAction<SelectedDate | undefined>
+  >;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
-  const { onDatePress, theme, onModeChange, hideHeaderButtons } = props;
+  const {
+    date = {
+      day: new Date().getDate(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
+    },
+    onDatePress,
+    theme,
+    onModeChange,
+    hideHeaderButtons,
+    selectedDate,
+    setSelectedDate,
+  } = props;
 
-  const [date, _setDate] = useState(1);
-  const [month, setMonth] = useState(() => new Date().getMonth() + 1);
-  const [year, setYear] = useState(() => new Date().getFullYear());
-
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>();
+  const [day, _setDate] = useState(1);
+  const [month, setMonth] = useState(
+    selectedDate ? selectedDate.gregorian.month : date.month
+  );
+  const [year, setYear] = useState(
+    selectedDate ? selectedDate.gregorian.year : date.year
+  );
 
   const styles = makeStyle(theme);
 
@@ -34,8 +54,8 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   }, [month, year]);
 
   const firstDayOfTheMonthIndex = useMemo(() => {
-    return new Date(year, month - 1, date).getDay();
-  }, [date, month, year]);
+    return new Date(year, month - 1, day).getDay();
+  }, [day, month, year]);
 
   const lastDayOfTheMonthIndex = useMemo(() => {
     return new Date(year, month, 0).getDay();
@@ -88,17 +108,42 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   const selected = (iDate: number) => {
     if (selectedDate) {
       return (
-        selectedDate.date === iDate &&
-        selectedDate.month === month &&
-        selectedDate.year === year
+        selectedDate.gregorian.date === iDate &&
+        selectedDate.gregorian.month === month &&
+        selectedDate.gregorian.year === year
       );
     }
     return false;
   };
 
   const handleDayPress = (pressedDay: number) => {
-    setSelectedDate({ date: pressedDay, month: month, year: year });
-    onDatePress({ date: pressedDay, month: month, year: year });
+    const convertToEthiopic = toEthiopic(year, month, pressedDay);
+
+    setSelectedDate({
+      ethiopian: {
+        date: convertToEthiopic.day as number,
+        month: convertToEthiopic.month as number,
+        year: convertToEthiopic.year as number,
+      },
+      gregorian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+    });
+
+    onDatePress({
+      ethiopian: {
+        date: convertToEthiopic.day as number,
+        month: convertToEthiopic.month as number,
+        year: convertToEthiopic.year as number,
+      },
+      gregorian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+    });
   };
 
   return (

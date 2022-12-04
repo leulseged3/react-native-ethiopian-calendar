@@ -6,6 +6,7 @@ import { iterator } from '../../utils/generics/array';
 import { Day } from './day';
 import { Header } from './header';
 import { makeStyle } from './styles';
+import { toEthiopic } from '../../utils/Calendar';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
@@ -36,10 +37,10 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
 
   const [day, _setDate] = useState(1);
   const [month, setMonth] = useState(
-    selectedDate ? selectedDate.month : date.month
+    selectedDate ? selectedDate.gregorian.month : date.month
   );
   const [year, setYear] = useState(
-    selectedDate ? selectedDate.year : date.year
+    selectedDate ? selectedDate.gregorian.year : date.year
   );
 
   const styles = makeStyle(theme);
@@ -107,17 +108,42 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   const selected = (iDate: number) => {
     if (selectedDate) {
       return (
-        selectedDate.date === iDate &&
-        selectedDate.month === month &&
-        selectedDate.year === year
+        selectedDate.gregorian.date === iDate &&
+        selectedDate.gregorian.month === month &&
+        selectedDate.gregorian.year === year
       );
     }
     return false;
   };
 
   const handleDayPress = (pressedDay: number) => {
-    setSelectedDate({ date: pressedDay, month: month, year: year });
-    onDatePress({ date: pressedDay, month: month, year: year });
+    const convertToEthiopic = toEthiopic(year, month, pressedDay);
+
+    setSelectedDate({
+      ethiopian: {
+        date: convertToEthiopic.day as number,
+        month: convertToEthiopic.month as number,
+        year: convertToEthiopic.year as number,
+      },
+      gregorian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+    });
+
+    onDatePress({
+      ethiopian: {
+        date: convertToEthiopic.day as number,
+        month: convertToEthiopic.month as number,
+        year: convertToEthiopic.year as number,
+      },
+      gregorian: {
+        date: pressedDay,
+        month: month,
+        year: year,
+      },
+    });
   };
 
   return (

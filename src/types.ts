@@ -39,7 +39,14 @@ export type Theme = {
 };
 
 export type SelectedDate = {
-  date: number;
-  month: number;
-  year: number;
+  ethiopian: {
+    date: number;
+    month: number;
+    year: number;
+  };
+  gregorian: {
+    date: number;
+    month: number;
+    year: number;
+  };
 };

@@ -1,31 +1,29 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-ethiopian-calendar';
+import { SafeAreaView, StyleSheet, ViewStyle } from 'react-native';
+import { Calendar } from 'react-native-ethiopian-calendar';
+import type { LanguageCode, Mode } from 'src/utils/locals/types';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const [mode, setMode] = React.useState<Mode>('EC');
+  const [locals, setLocals] = React.useState<LanguageCode>('AMH');
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Calendar
+        mode={mode}
+        onDatePress={(date) => console.log(date)}
+        onModeChange={(selectedMode) => setMode(selectedMode)}
+        onLanguageChange={(lang) => setLocals(lang)}
+        locale={locals}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+    marginTop: 30,
+  } as ViewStyle,
 });

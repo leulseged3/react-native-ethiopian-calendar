@@ -52,7 +52,7 @@ type Props = {
   initialDate?: Date;
 };
 
-export const Calendar: React.FC<Props> = (props) => {
+export const Calendar: React.FC<Props> = React.memo((props) => {
   const {
     mode = 'EC',
     locale = 'AMH',
@@ -71,9 +71,9 @@ export const Calendar: React.FC<Props> = (props) => {
       <EthiopianCalender
         date={
           initialDate && {
-            year: initialDate?.getFullYear(),
-            month: initialDate?.getMonth() + 1,
-            day: initialDate?.getDate(),
+            year: initialDate.getFullYear(),
+            month: initialDate.getMonth() + 1,
+            day: initialDate.getDate(),
           }
         }
         locale={locale}
@@ -90,9 +90,9 @@ export const Calendar: React.FC<Props> = (props) => {
     <GregorianCalendar
       date={
         initialDate && {
-          year: initialDate?.getFullYear(),
-          month: initialDate?.getMonth() + 1,
-          day: initialDate?.getDate(),
+          year: initialDate.getFullYear(),
+          month: initialDate.getMonth() + 1,
+          day: initialDate.getDate(),
         }
       }
       onDatePress={onDatePress}
@@ -103,4 +103,4 @@ export const Calendar: React.FC<Props> = (props) => {
       setSelectedDate={setSelectedDate}
     />
   );
-};
+});

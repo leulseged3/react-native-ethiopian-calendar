@@ -12,7 +12,7 @@ A react native calendar component which is mainly intended for applications whic
 
 ## Demo
 
-Insert gif or link to demo
+![](https://media.giphy.com/media/pPZ2YNUP1doG2KIWUG/giphy.gif)
 
 ## Installation
 
@@ -92,3 +92,5 @@ function App() {
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

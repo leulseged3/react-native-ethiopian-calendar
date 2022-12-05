@@ -82,7 +82,7 @@ function App() {
 | :------------------ | :-------------- | :------- | :------------------------------------------------------------------- | :-------------------------- |
 | `mode`              | `Mode`          | `false`  | a prop to switch b/n Ethiopian calendar and Gregorian calendar       | `EC`                        |
 | `locale`            | `LanguageCode`  | `false`  | to change the language of days names and months names.               | `AMH for EC and ENG for GC` |
-| `theme`             | `Theme`         | `false`  | o override default style                                             | `{}`                        |
+| `theme`             | `Theme`         | `false`  | to override default style                                            | `{}`                        |
 | `hideHeaderButtons` | `boolean`       | `false`  | to hide switch mode & change language dropdowns.                     | `false`                     |
 | `onDatePress`       | `function void` | `true`   | an event handler gets executed when date press event is fired.       |                             |
 | `onModeChange`      | `function void` | `false`  | an event handler gets invoked on mode change.                        |                             |

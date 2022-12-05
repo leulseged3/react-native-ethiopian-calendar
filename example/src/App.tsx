@@ -2,12 +2,11 @@ import * as React from 'react';
 
 import { SafeAreaView, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { Calendar } from 'react-native-ethiopian-calendar';
-import type { SelectedDate } from 'src/types';
-import type { LanguageCode, Mode } from 'src/utils/locals/types';
+import type { LanguageCode, Mode, SelectedDate } from 'src/types';
 
 export default function App() {
   const [mode, setMode] = React.useState<Mode>('EC');
-  const [locals, setLocals] = React.useState<LanguageCode>('AMH');
+  const [locale, setLocale] = React.useState<LanguageCode>('AMH');
   const [selectedDate, setSelectedDate] = React.useState<SelectedDate>();
 
   return (
@@ -16,8 +15,8 @@ export default function App() {
         mode={mode}
         onDatePress={(date) => setSelectedDate(date)}
         onModeChange={(selectedMode) => setMode(selectedMode)}
-        onLanguageChange={(lang) => setLocals(lang)}
-        locale={locals}
+        onLanguageChange={(lang) => setLocale(lang)}
+        locale={locale}
       />
       {
         <View style={styles.selectedDateWrapper}>

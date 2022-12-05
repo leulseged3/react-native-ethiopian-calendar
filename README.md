@@ -35,11 +35,11 @@ npm i react-native-ethiopian-calendar
 ```javascript
 import { Calendar } from 'react-native-ethiopian-calendar';
 import type { SelectedDate } from 'react-native-ethiopian-calendar/types';
-import type { LanguageCode, Mode } from 'react-native-ethiopian-calendar/utils/locals/types';
+import type { LanguageCode, Mode, SelectedDate } from 'src/types';
 
 function App() {
   const [mode, setMode] = React.useState<Mode>('EC');
-  const [locals, setLocals] = React.useState<LanguageCode>('AMH');
+  const [locale, setLocale] = React.useState<LanguageCode>('AMH');
   const [selectedDate, setSelectedDate] = React.useState<SelectedDate>();
 
   return (
@@ -47,8 +47,8 @@ function App() {
         mode={mode}
         onDatePress={(date) => setSelectedDate(date)}
         onModeChange={(selectedMode) => setMode(selectedMode)}
-        onLanguageChange={(lang) => setLocals(lang)}
-        locale={locals}
+        onLanguageChange={(lang) => setLocale(lang)}
+        locale={locale}
       />
   )
 }
@@ -61,7 +61,7 @@ import { Calendar } from 'react-native-ethiopian-calendar';
 
 function App() {
   const [mode, setMode] = React.useState('EC');
-  const [locals, setLocals] = React.useState('AMH');
+  const [locale, setLocale] = React.useState('AMH');
   const [selectedDate, setSelectedDate] = React.useState();
 
   return (
@@ -69,8 +69,8 @@ function App() {
       mode={mode}
       onDatePress={(date) => setSelectedDate(date)}
       onModeChange={(selectedMode) => setMode(selectedMode)}
-      onLanguageChange={(lang) => setLocals(lang)}
-      locale={locals}
+      onLanguageChange={(lang) => setLocale(lang)}
+      locale={locale}
     />
   );
 }

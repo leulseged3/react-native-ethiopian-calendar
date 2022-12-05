@@ -1,6 +1,6 @@
 {
   "name": "react-native-ethiopian-calendar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -38,7 +38,15 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "ethiopia",
+    "react-native-ethiopian-calendar",
+    "ethiopian-calendar",
+    "react-native-ethiopian-calendar-date-picker",
+    "react-native-ethiopian-date-picker",
+    "react-native-ethiopian-datepicker",
+    "calendar",
+    "ui-component"
   ],
   "repository": "https://github.com/leulseged3/react-native-ethiopian-calendar",
   "author": "Leulseged Tilahun Tesera <leulseged3@gmail.com> (https://github.com/leulseged3)",

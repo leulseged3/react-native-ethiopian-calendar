@@ -34,7 +34,6 @@ npm i react-native-ethiopian-calendar
 
 ```javascript
 import { Calendar } from 'react-native-ethiopian-calendar';
-import type { SelectedDate } from 'react-native-ethiopian-calendar/types';
 import type { LanguageCode, Mode, SelectedDate } from 'src/types';
 
 function App() {

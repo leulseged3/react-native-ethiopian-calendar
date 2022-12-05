@@ -12,7 +12,7 @@ A react native calendar component which is mainly intended for applications whic
 
 ## Demo
 
-![](https://media.giphy.com/media/pPZ2YNUP1doG2KIWUG/giphy.gif)
+![](https://media.giphy.com/media/FrjD4KFbOvIRR5vyBX/giphy.gif)
 
 ## Installation
 

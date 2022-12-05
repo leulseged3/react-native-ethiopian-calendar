@@ -50,3 +50,5 @@ export type SelectedDate = {
     year: number;
   };
 };
+
+export * from './utils/locals/types';

@@ -33,8 +33,12 @@ npm i react-native-ethiopian-calendar
 #### Typescript Example
 
 ```javascript
-import { Calendar } from 'react-native-ethiopian-calendar';
-import type { LanguageCode, Mode, SelectedDate } from 'src/types';
+import {
+  Calendar,
+  LanguageCode,
+  Mode,
+  SelectedDate,
+} from 'react-native-ethiopian-calendar';
 
 function App() {
   const [mode, setMode] = React.useState<Mode>('EC');

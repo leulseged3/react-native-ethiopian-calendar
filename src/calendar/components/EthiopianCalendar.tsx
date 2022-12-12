@@ -45,7 +45,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
 
   const styles = makeStyle(theme);
 
-  const [day, _setDay] = useState(
+  const [_day, _setDay] = useState(
     selectedDate
       ? selectedDate.ethiopian.date
       : (toEthiopic(date.year, date.month, date.day).day as number)
@@ -103,6 +103,14 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     return 7 - lastDayOfTheMonthIndex - 1;
   }, [lastDayOfTheMonthIndex]);
 
+  const currentDay = useMemo(() => {
+    return toEthiopic(
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
+      new Date().getDate()
+    ).day as number;
+  }, []);
+
   const currentMonthIndex = useMemo(() => {
     return toEthiopic(
       new Date().getFullYear(),
@@ -140,7 +148,11 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
   }, [month]);
 
   const today = (iDate: number) => {
-    return iDate === day && month === currentMonthIndex && year === currentYear;
+    return (
+      iDate === currentDay &&
+      month === currentMonthIndex &&
+      year === currentYear
+    );
   };
 
   const selected = (iDate: number) => {
@@ -203,7 +215,6 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
           <Day
             key={i}
             dayNumber={30 - firstDayOfTheMonthIndex + i + 1}
-            today={today(i + 1)}
             extraDays
             theme={theme}
           />
@@ -235,13 +246,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
-          <Day
-            key={i}
-            dayNumber={i + 1}
-            today={today(i + 1)}
-            extraDays
-            theme={theme}
-          />
+          <Day key={i} dayNumber={i + 1} extraDays theme={theme} />
         ))}
       </View>
     </View>

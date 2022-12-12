@@ -1,6 +1,6 @@
 {
   "name": "react-native-ethiopian-calendar",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A react native calendar component which is mainly intended for applications which require Ethiopian calendar.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
 import { makeStyle } from './style';
@@ -7,6 +7,8 @@ import type { Theme } from '../../../types';
 import { LocalsDropDown, SwitchMode } from '../../../commons/components';
 
 type DayProps = {
+  currentDay: number;
+  today: () => void;
   prev: () => void;
   next: () => void;
   month: number;
@@ -21,6 +23,8 @@ type DayProps = {
 
 export const Header: React.FC<DayProps> = React.memo((props) => {
   const {
+    currentDay,
+    today,
     prev,
     next,
     month,
@@ -40,6 +44,11 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
       {!hideHeaderButtons && (
         <View style={styles.headerButtonsWrapper}>
           <SwitchMode theme={theme} mode={mode} onModeChange={onModeChange} />
+          <View style={styles.todayButton}>
+            <TouchableOpacity onPress={today} activeOpacity={0.9}>
+              <Text style={styles.todayText}>{currentDay}</Text>
+            </TouchableOpacity>
+          </View>
           {mode === 'EC' && (
             <LocalsDropDown
               theme={theme}

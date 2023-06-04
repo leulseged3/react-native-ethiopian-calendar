@@ -127,6 +127,11 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     ).year as number;
   }, []);
 
+  const gotoToday = useCallback(()=> {
+      setMonth(currentMonthIndex)
+      setYear(currentYear)
+  }, [currentYear, currentMonthIndex])
+
   const next = useCallback(() => {
     const newMonth = month + 1;
     if (newMonth > 13) {
@@ -198,6 +203,8 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
   return (
     <View style={styles.container}>
       <Header
+        currentDay={currentDay}
+        today={gotoToday}
         next={next}
         prev={prev}
         month={month}
@@ -219,7 +226,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
             theme={theme}
           />
         ))}
-        {/* EXCEPT TO ጳጉሜ, EVERY OTHET MONTH HAS EXACTLY 30 DAYS.*/}
+        {/* EXCEPT TO ጳጉሜ, EVERY OTHER MONTH HAS EXACTLY 30 DAYS.*/}
         {month !== 13
           ? iterator(30).map((_item, i) => (
               <Day

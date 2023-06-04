@@ -65,6 +65,11 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     return 7 - lastDayOfTheMonthIndex - 1;
   }, [lastDayOfTheMonthIndex]);
 
+  const gotoToday = useCallback(()=> {
+      setMonth(currentMonthIndex)
+      setYear(currentYear)
+  }, [currentYear, currentMonthIndex])
+
   const next = useCallback(() => {
     const newMonth = month + 1;
     if (newMonth > 12) {
@@ -149,6 +154,8 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   return (
     <View style={styles.container}>
       <Header
+        currentDay={currentDay}
+        today={gotoToday}
         next={next}
         prev={prev}
         month={month}

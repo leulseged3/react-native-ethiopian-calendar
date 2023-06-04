@@ -32,6 +32,27 @@ export const makeStyle = (theme: Theme = {}) => {
     headerTitle: {
       flexDirection: 'row',
     } as ViewStyle,
+    todayButton: {
+      /* borderRadius: 10, */
+      backgroundColor: mergedStyles.headerBackgroundColor,
+      backgroundColor: mergedStyles.localsDropdownBackgroundColor,
+      alignItems: 'center',
+      padding: 5,
+      paddingHorizontal: 10,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+    } as ViewStyle,
+    todayText: {
+      color: mergedStyles.todayTextColor,
+      fontSize: mergedStyles.textMonthFontSize,
+    } as ViewStyle,
     titleText: {
       fontSize: mergedStyles.textMonthFontSize,
       fontFamily: mergedStyles.textMonthFontFamily,

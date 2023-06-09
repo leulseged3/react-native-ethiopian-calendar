@@ -33,8 +33,6 @@ export const makeStyle = (theme: Theme = {}) => {
       flexDirection: 'row',
     } as ViewStyle,
     todayButton: {
-      /* borderRadius: 10, */
-      backgroundColor: mergedStyles.headerBackgroundColor,
       backgroundColor: mergedStyles.localsDropdownBackgroundColor,
       alignItems: 'center',
       padding: 5,

@@ -65,10 +65,18 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     return 7 - lastDayOfTheMonthIndex - 1;
   }, [lastDayOfTheMonthIndex]);
 
-  const gotoToday = useCallback(()=> {
-      setMonth(currentMonthIndex)
-      setYear(currentYear)
-  }, [currentYear, currentMonthIndex])
+  const currentYear = useMemo(() => {
+    return new Date().getFullYear();
+  }, []);
+
+  const currentMonthIndex = useMemo(() => {
+    return new Date().getMonth() + 1;
+  }, []);
+
+  const gotoToday = useCallback(() => {
+    setMonth(currentMonthIndex);
+    setYear(currentYear);
+  }, [currentMonthIndex, currentYear]);
 
   const next = useCallback(() => {
     const newMonth = month + 1;
@@ -89,14 +97,6 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
       setMonth(newMonth);
     }
   }, [month]);
-
-  const currentMonthIndex = useMemo(() => {
-    return new Date().getMonth() + 1;
-  }, []);
-
-  const currentYear = useMemo(() => {
-    return new Date().getFullYear();
-  }, []);
 
   const currentDay = useMemo(() => {
     return new Date().getDate();

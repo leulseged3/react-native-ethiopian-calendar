@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import type { LanguageCode, Mode } from '../../../utils/locals/types';
 import { getDaysNameOfTheWeek, getMonthsName } from '../../../utils/locals';
 import { makeStyle } from './style';
